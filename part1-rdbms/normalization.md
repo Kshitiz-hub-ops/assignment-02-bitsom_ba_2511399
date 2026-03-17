@@ -29,3 +29,14 @@ If the only order containing product_id = P004 (Notebook) is deleted, then the p
 
 Columns involved:
 product_id, product_name, category
+
+
+## Normalization Justification
+
+Keeping all the data in a single table might look simple at first, but it creates several problems when the dataset grows. In the given orders dataset, many fields such as customer information, product details, and sales representative details are repeated in multiple rows. For example, the same customer like “Rohan Mehta” appears in multiple orders, and his email and city are repeated every time. If the customer’s email needs to be updated, it would have to be changed in every row where that customer appears. If one row is missed, the database will contain inconsistent information. This is known as an update anomaly.
+
+Another issue is insertion anomaly. In a single large table, it may not be possible to add information about a new product or a new sales representative unless there is an order associated with it. For instance, if a new product is introduced but no order has been placed yet, we still should be able to store its details. A normalized design allows this by keeping products in a separate table.
+
+Deletion anomaly is also a concern. If the only order containing a particular product is deleted, the product information could be lost as well. By separating the data into different tables such as customers, products, sales representatives, orders, and order items, each type of information is stored only once and linked using keys.
+
+Therefore, normalization helps reduce redundancy, prevents data inconsistencies, and makes the database easier to maintain and update.
