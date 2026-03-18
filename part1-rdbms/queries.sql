@@ -7,7 +7,7 @@ JOIN orders o ON c.customer_id = o.customer_id
 JOIN order_items oi ON o.order_id = oi.order_id
 JOIN products p ON oi.product_id = p.product_id
 WHERE c.customer_city = 'Mumbai'
-GROUP BY c.customer_name;
+GROUP BY c.customer_id, c.customer_name;
 
 -- Q2: Top 3 products by total quantity sold
 
@@ -24,7 +24,7 @@ LIMIT 3;
 SELECT s.sales_rep_name,
 COUNT(DISTINCT o.customer_id) AS total_customers
 FROM sales_reps s
-JOIN orders o ON s.sales_rep_id = o.sales_rep_id
+LEFT JOIN orders o ON s.sales_rep_id = o.sales_rep_id
 GROUP BY s.sales_rep_name;
 
 -- Q4: Orders where total value > 10000
